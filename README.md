@@ -1,4 +1,4 @@
-# Get-msDSSupportedEncryptionTypes
+# Get-msDSSupportedEncryptionTypes for Powershell 7.2
 
 Run with ". Get-msDSSupportedEncryptionTypes.ps1" or ". Get-msDSSupportedEncryptionTypes.ps1 DomainControllerName"
 
