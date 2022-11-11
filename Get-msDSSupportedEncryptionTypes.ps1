@@ -1,9 +1,11 @@
 [CmdletBinding()]
 param(
 	[Parameter(Position=0,ValueFromPipeline=$true,ValueFromPipelineByPropertyName=$true)]
-	[Alias("CN","Comp")]
+	[Alias("CN","DC","DomainController")]
 	[String]$server=("$env:LOGONSERVER").Trim("\\"),
-	[String]$ErrorLog
+	[Parameter(Position=1,ValueFromPipeline=$false,ValueFromPipelineByPropertyName=$false)]
+	[Alias("Output","File")]
+	[String]$ExportPath="C:\Temp"	
 	)
 
 $cred = Get-Credential
@@ -57,4 +59,4 @@ $ComputerInfo = Get-ADComputer @GetUserParams | Select-Object -Property @(
 ) 
 
 $ComputerInfo | Where-Object {$_.SupportedEncryptionTypes -match "RC4" -or $_.SupportedEncryptionTypes -eq $null} | Sort-Object "OperatingSystem" | Out-GridView
-$ComputerInfo | Export-Csv -Path "C:\Temp\ComputerInfo.csv" -NoTypeInformation
+$ComputerInfo | Export-Csv -Path $ExportPath -NoTypeInformation
